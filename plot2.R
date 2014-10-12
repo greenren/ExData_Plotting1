@@ -13,7 +13,10 @@ dateDownloaded <- date()
 #Change $Date and $Time columns to Date and Time objects
 data$Date <- as.Date(data$Date, "%d/%m/%Y")
 data$Time <- strptime(data$Time, "%H:%M:%S")
+data$DateTime <- strptime(paste(as.character(data$Date), strftime(data$Time, "%H:%M:%S")), format = "%Y-%m-%d %H:%M:%S")
 
 #Create plot2
 png(file = "plot2.png")
+with(data, plot(DateTime, Global_active_power, type='l', ylab="Global Active Power (kilowatts)", xlab=""))
+
 dev.off()
